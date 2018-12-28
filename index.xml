@@ -16,7 +16,26 @@
       <pubDate>Thu, 20 Dec 2018 00:00:00 +0800</pubDate>
       
       <guid>/rs/autonomy/</guid>
-      <description></description>
+      <description>
+
+&lt;h1 id=&#34;autonomy-engineering&#34;&gt;Autonomy Engineering&lt;/h1&gt;
+
+&lt;p&gt;I am an electrical engineer who had got the A-level appraisal in Huawei; I enjoy programming and developing an automatic control system. I became interested in the autonomy for Mobility-on-Demand because of the enthusiasm of building an intelligent world. During my BEng&amp;rsquo;s studies, automation, my major not only equipped me with the knowledge but also encouraging me to take more works in the high-level automatic control system.&lt;/p&gt;
+
+&lt;p&gt;I had two projects to which I had applied my engineering and research skills, the autonomous manipulating system and the smart 3D machine vision. My experiences in industries will also help to bring more practical applications for urban mobility systems.&lt;/p&gt;
+
+&lt;h3 id=&#34;autonomous-manipulating-system&#34;&gt;Autonomous Manipulating System&lt;/h3&gt;
+
+&lt;p&gt;The focus of my attention in this project is developing an automatic manipulating system based on stereo vision. Firstly, I established an arm-robot hardware platform. Secondly, I adopted a decision model based on reinforcement-learning to handle workpieces effectively. This project has two stages. The first is to build a precision robot platform and provide adequate controlling interface second to adopt approaches that manipulate items based on its characteristics such as population and volume.&lt;/p&gt;
+
+&lt;p&gt;In this project, an automated robot platform was established successfully because of my solid understanding of control theories and well-built engineering skills.&lt;/p&gt;
+
+&lt;h3 id=&#34;smart-3d-machine-vision&#34;&gt;Smart 3D Machine Vision&lt;/h3&gt;
+
+&lt;p&gt;Intelligent urban mobility systems require smart machine vision. Machine vision or imaging is a complicated problem. During my MEng&amp;rsquo;s studies, I established the research topic of optical imaging based on deep learning in my group. I introduced a multifunctional imaging scheme based on deep learning methods. Based on this scheme, I have developed several deep learning inspection systems for our current industrial partner such as HP. Considering my automation background, I will be interested in utilizing these smart machine vision techniques to integrate information on human-machine and commercial activities.&lt;/p&gt;
+
+&lt;p&gt;In this IRG, I will exploit advanced control theories and efficient signal processing techniques to develop next-generation urban mobility systems. I am confident that I will develop a valuable mobility system to enhance sustainability and societal well-being on a global scale.&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -25,7 +44,26 @@
       <pubDate>Thu, 20 Dec 2018 00:00:00 +0800</pubDate>
       
       <guid>/rs/optics/</guid>
-      <description></description>
+      <description>
+
+&lt;h1 id=&#34;bio-vision-research&#34;&gt;Bio-Vision Research&lt;/h1&gt;
+
+&lt;p&gt;I am an optical researcher; I enjoy optics and developing micro/nanoscale imaging system. I became interested in Quantitative Phase Microscopy (QPM) because of the beauty in the nanoscale world. QPM and phase retrieval methods have fascinated my current research group for more than a decade and me for several years.  In microscopy experiments, the phase part of a light wave often contains valuable information on the studied specimen.&lt;/p&gt;
+
+&lt;p&gt;At the moment, I have two projects to which I am applying my research skills, optical methods for cells/tissue sensing, deep learning enhanced imaging system.&lt;/p&gt;
+
+&lt;h3 id=&#34;optical-sensing&#34;&gt;Optical Sensing&lt;/h3&gt;
+
+&lt;p&gt;The focus of my attention in this project is developing a multiscale measurement system using optical methods. Firstly, the Transport Intensity of Equation is applied to obtain the 3D profile of the sample in nanoscale. Secondly, the deconvolution-based (PSF image model) algorithm is applied to extract the depth in the obtained image stack. This project has two stages. The first is to prove the validity of my methods via simulation and the second to implement a fine-tuned optical system based on proved methods.&lt;/p&gt;
+
+&lt;p&gt;In this project, a hyper-domains imaging system was built successfully because of my solid knowledge of optics and well-built experimental skills.&lt;/p&gt;
+
+&lt;h3 id=&#34;imaging-system-based-on-deep-learning&#34;&gt;Imaging System based on Deep Learning&lt;/h3&gt;
+
+&lt;p&gt;During my MEng&amp;rsquo;s studies, I established the research topic of optical imaging based on deep learning in my group. I introduced a multifunctional imaging scheme based on deep learning methods. Based on this scheme, I have developed several deep learning inspection systems for our current industrial partner such as HP.  Meanwhile, I am exploiting the deep learning methods to improve the performance of the Transport Intensity of Equation and deconvolution-based phase retrieval methods. Eventually, I will be interested in developing smart tools to probe hyper-domain fundamentals of biological phenomena.&lt;/p&gt;
+
+&lt;p&gt;In this IRG, We should exploit fundamental optical theories and advanced signal processing techniques to develop next-generation bio-sensing technologies. I am confident that I will be able to develop a useful imaging system to lead new advances in our understanding of biological phenomena.&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -34,15 +72,6 @@
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0800</pubDate>
       
       <guid>/project/optics/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Hellp &amp; Upcoming Talks</title>
-      <link>/talk/optics/</link>
-      <pubDate>Wed, 20 Apr 2016 00:00:00 +0800</pubDate>
-      
-      <guid>/talk/optics/</guid>
       <description></description>
     </item>
     
