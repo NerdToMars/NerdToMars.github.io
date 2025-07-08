@@ -54,3 +54,7 @@ menu = [
     { name = "/projects", url = "/projects", weight = 2 },
     { name = "/tags", url = "/tags", weight = 3 },
 ]
+
+[extra.analytics.goatcounter]
+user = "chongtia002"
+host = "goatcounter.com"
