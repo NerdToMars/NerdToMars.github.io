@@ -31,6 +31,8 @@ toc = true
 [extra]
 # Put all your custom variables here
 theme = "toggle"              # light, dark, auto, toggle
+mathjax = true
+mathjax_dollar_inline_enable = true
 
 # SEO and meta tags
 author = "Chongting"
@@ -59,4 +61,4 @@ enabled = true
 
 [extra.analytics.goatcounter]
 user = "chongtia002"
-host = "goatcounter.com"
+host = "goatcounter.com" # https://chongtia002.goatcounter.com/

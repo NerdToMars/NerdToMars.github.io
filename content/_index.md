@@ -99,3 +99,4 @@ I specialize in building intelligent systems that can see, understand, and inter
 - Computer vision algorithms for industrial applications
 
 ---
+
