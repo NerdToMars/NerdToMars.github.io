@@ -91,3 +91,7 @@ auto discriminant = b * b - 4.0 * a * c;     // all scalars, use *
 4. **Check your types**: If you're multiplying two `double` values, you want `*`, not `dot()`
 
 The bug happens when you forget that dot products reduce vectors to scalars, and then try to "reconstruct" the original vector math instead of following the simplified scalar formula.
+
+# Reference
+
+Reference: [Ray Tracing in One Weekend - Adding a Sphere](https://raytracing.github.io/books/RayTracingInOneWeekend.html#addingasphere)
