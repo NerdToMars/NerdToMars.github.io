@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;nerdtomars.github.io">
+
+    
+
+    
+    
+    
+        <title>
+            
+                A Simple Image synthesis pipeline for machine learning model training
+            
+        </title>
+
+        
+            <meta property="og:title"
+                  content="A Simple Image synthesis pipeline for machine learning model training" />
+        
+    
+
+    
+        
+            <meta property="og:description" content="A simple image synthesis pipeline based on mitsuba3 and visualization tooling using rerun" />
+        
+    
+
+    
+        
+            <meta name="description" content="A simple image synthesis pipeline based on mitsuba3 and visualization tooling using rerun" />
+        
+    
+
+    
+    
+
+    
+    
+        <link href=https://nerdtomars.github.io/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+        
+
+        
+            
+            
+
+            <script data-goatcounter="https://chongtia002.goatcounter.com/count"
+                    async
+                    src="https://nerdtomars.github.io/js/count.js"></script>
+            <noscript>
+                
+                <img src="https://chongtia002.goatcounter.com//count?p=&#x2F;projects&#x2F;synthetic-image-for-ai&#x2F;&t=A Simple Image synthesis pipeline for machine learning model training">
+            </noscript>
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+        
+            <script>
+            MathJax = {
+              tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+              }
+            };
+            </script>
+        
+        <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+        </script>
+    
+
+    
+    
+
+
+    
+    
+        <link rel="stylesheet"
+              type="text/css"
+              href="https://nerdtomars.github.io/theme/light.css" />
+        <link id="darkModeStyle"
+              rel="stylesheet"
+              type="text/css"
+              href="https://nerdtomars.github.io/theme/dark.css" />
+    
+
+    <!-- Set the correct theme in the script -->
+
+    
+        <script src=https://nerdtomars.github.io/js/themetoggle.js></script>
+
+        
+            <script>setTheme(getSavedTheme());</script>
+        
+    
+
+
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="https://nerdtomars.github.io/main.css" />
+
+    
+
+    <script defer
+                    src="https://nerdtomars.github.io/search_index.en.js?h=0c4634d9dd2b11f85005"></script>
+        <script defer
+                src="https://nerdtomars.github.io/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script></head>
+
+
+    <body>
+        <div class="left-content">
+            
+            
+        </div>
+
+        <div class="content">
+            <nav>
+    <div class="left-nav">
+        
+            <a href=https:&#x2F;&#x2F;nerdtomars.github.io>Bits and Pixels</a>
+        
+
+
+        <div class="socials">
+            
+                <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;nerdtomars" class="social">
+                    <img alt="github" src="https://nerdtomars.github.io/icons/social/github.svg">
+                </a>
+            
+        </div>
+    </div>
+
+    <div class="right-nav">
+        
+            <a href=https://nerdtomars.github.io/posts style="margin-right: 0.5em">&#x2F;posts</a>
+        
+            <a href=https://nerdtomars.github.io/projects style="margin-right: 0.5em">&#x2F;projects</a>
+        
+            <a href=https://nerdtomars.github.io/tags style="margin-right: 0.5em">&#x2F;tags</a>
+        
+
+        
+            <button id="search-button"
+                    class="search-button"
+                    title="$SHORTCUT to open search">
+                <img src="https://nerdtomars.github.io/icons/search.svg"
+                    alt="Search"
+                    class="search-icon">
+            </button>
+
+            <div id="searchModal"
+                class="search-modal js"
+                role="dialog"
+                aria-labelledby="modalTitle">
+                <div id="modal-content">
+                    <h1 id="modalTitle" class="page-header">Search</h1>
+                    <div id="searchBar">
+                        <input id="searchInput"
+                            role="combobox"
+                            autocomplete="off"
+                            spellcheck="false"
+                            aria-expanded="false"
+                            aria-controls="results-container"
+                            placeholder="Search..." />
+                        <button id="clear-search" class="clear-button" title="Clear search">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="results-container">
+                        <div id="results-info">
+                            <span id="zero_results" style="display: none;">No results</span>
+                            <span id="one_result" style="display: none;">1 result</span>
+                            <span id="many_results" style="display: none;">$NUMBER results</span>
+                        </div>
+                        <div id="results" role="listbox"></div>
+                    </div>
+                </div>
+            </div>
+        
+
+        
+            <a id="dark-mode-toggle"
+            onclick="toggleTheme(); event.preventDefault();"
+            href="#">
+                <img src="https://nerdtomars.github.io/icons/sun.svg"
+                    id="sun-icon"
+                    style="filter: invert(1)"
+                    alt="Light" />
+                <img src=https://nerdtomars.github.io/icons/moon.svg id="moon-icon" alt="Dark" />
+            </a>
+
+            <!-- Initialize the theme toggle icons -->
+            <script>updateItemToggleTheme()</script>
+        
+    </div>
+</nav>
+
+
+            
+            
+    
+<div class="visible-element-observer-root" data-selector="main article p">
+    <main>
+        <article>
+            <div class="title">
+                
+                
+    
+    <div class="page-header">
+        A Simple Image synthesis pipeline for machine learning model training
+    </div>
+    
+
+
+                <div class="meta">
+                    
+
+
+                    
+
+                    
+
+                    
+
+                    
+                    
+
+                    
+                    
+
+                    
+                    
+
+                    
+
+                </div>
+            </div>
+
+            
+
+            <section class="body">
+                <div {% if class %}class="{{class}}"{% endif %}>
+    <iframe src="https://app.rerun.io/version/0.23.1/index.html?url=https://nerdtomars.github.io/synthetic_image_for_ai/data_0.23.1.rrd" style="width: 100%; height: 600px; border: 1px solid #ddd; border-radius: 8px;"></iframe>
+</div>
+<h1 id="a-simple-image-synthesis-pipeline-for-machine-learning-model-training">A Simple Image Synthesis Pipeline for Machine Learning Model Training</h1>
+<p>This project demonstrates a simple image synthesis pipeline based on Mitsuba3 and visualization tooling using Rerun. The pipeline generates synthetic images for machine learning model training with comprehensive visualization capabilities.</p>
+<h2 id="overview">Overview</h2>
+<p>The pipeline combines the power of Mitsuba3 for physically-based rendering with Rerun's advanced visualization tools to create high-quality synthetic datasets for machine learning applications.</p>
+<h2 id="key-features">Key Features</h2>
+<ul>
+<li><strong>Physically-based rendering</strong> using Mitsuba3</li>
+<li><strong>Interactive 3D scene exploration</strong> with Rerun</li>
+</ul>
+<p>For more details about the implementation, visit the <a href="https://github.com/NerdToMars/nerf-rust/tree/main/src">GitHub repository</a>.</p>
+
+            </section>
+        </article>
+    </main>
+</div>
+
+
+
+            
+                
+            
+
+            
+        </div>
+
+        <div class="right-content">
+            
+    
+    
+
+        </div>
+    </body>
+
+</html>

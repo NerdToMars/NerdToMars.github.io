@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;nerdtomars.github.io">
+
+    
+
+    
+    
+    
+        <title>
+            
+                Projects
+            
+        </title>
+
+        
+            <meta property="og:title"
+                  content="Bits and Pixels" />
+        
+    
+
+    
+        
+            <meta property="og:description" content="Exploring computer vision, software engineering, and computer graphics through code, research, and random discoveries" />
+        
+    
+
+    
+        
+            <meta name="description" content="Exploring computer vision, software engineering, and computer graphics through code, research, and random discoveries" />
+        
+    
+
+    
+    
+
+    
+    
+        <link href=https://nerdtomars.github.io/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+        
+
+        
+            
+            
+
+            <script data-goatcounter="https://chongtia002.goatcounter.com/count"
+                    async
+                    src="https://nerdtomars.github.io/js/count.js"></script>
+            <noscript>
+                
+                <img src="https://chongtia002.goatcounter.com//count?p=&#x2F;projects&#x2F;&t=Bits and Pixels">
+            </noscript>
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+        
+            <script>
+            MathJax = {
+              tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+              }
+            };
+            </script>
+        
+        <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+        </script>
+    
+
+    
+    
+
+
+    
+    
+        <link rel="stylesheet"
+              type="text/css"
+              href="https://nerdtomars.github.io/theme/light.css" />
+        <link id="darkModeStyle"
+              rel="stylesheet"
+              type="text/css"
+              href="https://nerdtomars.github.io/theme/dark.css" />
+    
+
+    <!-- Set the correct theme in the script -->
+
+    
+        <script src=https://nerdtomars.github.io/js/themetoggle.js></script>
+
+        
+            <script>setTheme(getSavedTheme());</script>
+        
+    
+
+
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="https://nerdtomars.github.io/main.css" />
+
+    
+
+    <script defer
+                    src="https://nerdtomars.github.io/search_index.en.js?h=0c4634d9dd2b11f85005"></script>
+        <script defer
+                src="https://nerdtomars.github.io/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script></head>
+
+
+    <body>
+        <div class="left-content">
+            
+            
+        </div>
+
+        <div class="content">
+            <nav>
+    <div class="left-nav">
+        
+            <a href=https:&#x2F;&#x2F;nerdtomars.github.io>Bits and Pixels</a>
+        
+
+
+        <div class="socials">
+            
+                <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;nerdtomars" class="social">
+                    <img alt="github" src="https://nerdtomars.github.io/icons/social/github.svg">
+                </a>
+            
+        </div>
+    </div>
+
+    <div class="right-nav">
+        
+            <a href=https://nerdtomars.github.io/posts style="margin-right: 0.5em">&#x2F;posts</a>
+        
+            <a href=https://nerdtomars.github.io/projects style="margin-right: 0.5em">&#x2F;projects</a>
+        
+            <a href=https://nerdtomars.github.io/tags style="margin-right: 0.5em">&#x2F;tags</a>
+        
+
+        
+            <button id="search-button"
+                    class="search-button"
+                    title="$SHORTCUT to open search">
+                <img src="https://nerdtomars.github.io/icons/search.svg"
+                    alt="Search"
+                    class="search-icon">
+            </button>
+
+            <div id="searchModal"
+                class="search-modal js"
+                role="dialog"
+                aria-labelledby="modalTitle">
+                <div id="modal-content">
+                    <h1 id="modalTitle" class="page-header">Search</h1>
+                    <div id="searchBar">
+                        <input id="searchInput"
+                            role="combobox"
+                            autocomplete="off"
+                            spellcheck="false"
+                            aria-expanded="false"
+                            aria-controls="results-container"
+                            placeholder="Search..." />
+                        <button id="clear-search" class="clear-button" title="Clear search">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="results-container">
+                        <div id="results-info">
+                            <span id="zero_results" style="display: none;">No results</span>
+                            <span id="one_result" style="display: none;">1 result</span>
+                            <span id="many_results" style="display: none;">$NUMBER results</span>
+                        </div>
+                        <div id="results" role="listbox"></div>
+                    </div>
+                </div>
+            </div>
+        
+
+        
+            <a id="dark-mode-toggle"
+            onclick="toggleTheme(); event.preventDefault();"
+            href="#">
+                <img src="https://nerdtomars.github.io/icons/sun.svg"
+                    id="sun-icon"
+                    style="filter: invert(1)"
+                    alt="Light" />
+                <img src=https://nerdtomars.github.io/icons/moon.svg id="moon-icon" alt="Dark" />
+            </a>
+
+            <!-- Initialize the theme toggle icons -->
+            <script>updateItemToggleTheme()</script>
+        
+    </div>
+</nav>
+
+
+            
+            
+    
+    
+    <div class="page-header">
+        Projects
+    </div>
+    
+
+
+    <main>
+    <div class="cards">
+            <div class="card">
+                
+                    
+                    
+                        
+                    
+
+                    
+                    <img class="card-image"
+                         alt="assets&#x2F;structure_light&#x2F;screenshot.png"
+                         src="https:&#x2F;&#x2F;nerdtomars.github.io&#x2F;processed_images&#x2F;screenshot.237f33a7260b7358.webp" />
+                
+
+                <div class="card-info">
+                    <h1 class="card-title">
+                        
+                            <a href=https://nerdtomars.github.io/projects/structure-light/>A High-accuracy Structure Light Scanner</a>
+                        
+                    </h1>
+
+                    <div class="meta">
+                    </div>
+
+                    <div class="card-description">
+                        A high-accuracy structure light scanner based on a custom-built projector and a high-resolution camera
+                    </div>
+                </div>
+            </div>
+
+        
+            <div class="card">
+                
+                    
+                    
+                        
+                    
+
+                    
+                    <img class="card-image"
+                         alt="assets&#x2F;synthetic_image_for_ai&#x2F;screenshot.png"
+                         src="https:&#x2F;&#x2F;nerdtomars.github.io&#x2F;processed_images&#x2F;screenshot.6ff51caf62ffa980.webp" />
+                
+
+                <div class="card-info">
+                    <h1 class="card-title">
+                        
+                            <a href=https://nerdtomars.github.io/projects/synthetic-image-for-ai/>A Simple Image synthesis pipeline for machine learning model training</a>
+                        
+                    </h1>
+
+                    <div class="meta">
+                    </div>
+
+                    <div class="card-description">
+                        A simple image synthesis pipeline based on mitsuba3 and visualization tooling using rerun
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    
+
+
+            
+                
+            
+
+            
+        </div>
+
+        <div class="right-content">
+            
+            
+        </div>
+    </body>
+
+</html>

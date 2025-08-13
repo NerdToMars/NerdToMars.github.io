@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;nerdtomars.github.io">
+
+    
+
+    
+    
+    
+        <title>
+            
+                Ray-Sphere Intersection: A Subtle Bug with Dot Products
+            
+        </title>
+
+        
+            <meta property="og:title"
+                  content="Ray-Sphere Intersection: A Subtle Bug with Dot Products" />
+        
+    
+
+    
+        
+            <meta property="og:description" content="Exploring computer vision, software engineering, and computer graphics through code, research, and random discoveries" />
+        
+    
+
+    
+        
+            <meta name="description" content="Exploring computer vision, software engineering, and computer graphics through code, research, and random discoveries" />
+        
+    
+
+    
+    
+
+    
+    
+        <link href=https://nerdtomars.github.io/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+        
+
+        
+            
+            
+
+            <script data-goatcounter="https://chongtia002.goatcounter.com/count"
+                    async
+                    src="https://nerdtomars.github.io/js/count.js"></script>
+            <noscript>
+                
+                <img src="https://chongtia002.goatcounter.com//count?p=&#x2F;posts&#x2F;raytracing-basic-sphere&#x2F;&t=Ray-Sphere Intersection: A Subtle Bug with Dot Products">
+            </noscript>
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+        
+            <script>
+            MathJax = {
+              tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+              }
+            };
+            </script>
+        
+        <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+        </script>
+    
+
+    
+    
+
+
+    
+    
+        <link rel="stylesheet"
+              type="text/css"
+              href="https://nerdtomars.github.io/theme/light.css" />
+        <link id="darkModeStyle"
+              rel="stylesheet"
+              type="text/css"
+              href="https://nerdtomars.github.io/theme/dark.css" />
+    
+
+    <!-- Set the correct theme in the script -->
+
+    
+        <script src=https://nerdtomars.github.io/js/themetoggle.js></script>
+
+        
+            <script>setTheme(getSavedTheme());</script>
+        
+    
+
+
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="https://nerdtomars.github.io/main.css" />
+
+    
+
+    <script defer
+                    src="https://nerdtomars.github.io/search_index.en.js?h=0c4634d9dd2b11f85005"></script>
+        <script defer
+                src="https://nerdtomars.github.io/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script></head>
+
+
+    <body>
+        <div class="left-content">
+            
+            
+        </div>
+
+        <div class="content">
+            <nav>
+    <div class="left-nav">
+        
+            <a href=https:&#x2F;&#x2F;nerdtomars.github.io>Bits and Pixels</a>
+        
+
+
+        <div class="socials">
+            
+                <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;nerdtomars" class="social">
+                    <img alt="github" src="https://nerdtomars.github.io/icons/social/github.svg">
+                </a>
+            
+        </div>
+    </div>
+
+    <div class="right-nav">
+        
+            <a href=https://nerdtomars.github.io/posts style="margin-right: 0.5em">&#x2F;posts</a>
+        
+            <a href=https://nerdtomars.github.io/projects style="margin-right: 0.5em">&#x2F;projects</a>
+        
+            <a href=https://nerdtomars.github.io/tags style="margin-right: 0.5em">&#x2F;tags</a>
+        
+
+        
+            <button id="search-button"
+                    class="search-button"
+                    title="$SHORTCUT to open search">
+                <img src="https://nerdtomars.github.io/icons/search.svg"
+                    alt="Search"
+                    class="search-icon">
+            </button>
+
+            <div id="searchModal"
+                class="search-modal js"
+                role="dialog"
+                aria-labelledby="modalTitle">
+                <div id="modal-content">
+                    <h1 id="modalTitle" class="page-header">Search</h1>
+                    <div id="searchBar">
+                        <input id="searchInput"
+                            role="combobox"
+                            autocomplete="off"
+                            spellcheck="false"
+                            aria-expanded="false"
+                            aria-controls="results-container"
+                            placeholder="Search..." />
+                        <button id="clear-search" class="clear-button" title="Clear search">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="results-container">
+                        <div id="results-info">
+                            <span id="zero_results" style="display: none;">No results</span>
+                            <span id="one_result" style="display: none;">1 result</span>
+                            <span id="many_results" style="display: none;">$NUMBER results</span>
+                        </div>
+                        <div id="results" role="listbox"></div>
+                    </div>
+                </div>
+            </div>
+        
+
+        
+            <a id="dark-mode-toggle"
+            onclick="toggleTheme(); event.preventDefault();"
+            href="#">
+                <img src="https://nerdtomars.github.io/icons/sun.svg"
+                    id="sun-icon"
+                    style="filter: invert(1)"
+                    alt="Light" />
+                <img src=https://nerdtomars.github.io/icons/moon.svg id="moon-icon" alt="Dark" />
+            </a>
+
+            <!-- Initialize the theme toggle icons -->
+            <script>updateItemToggleTheme()</script>
+        
+    </div>
+</nav>
+
+
+            
+            
+    
+<div class="visible-element-observer-root" data-selector="main article p">
+    <main>
+        <article>
+            <div class="title">
+                
+                
+    
+    <div class="page-header">
+        Ray-Sphere Intersection: A Subtle Bug with Dot Products
+    </div>
+    
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2025-07-14</time>
+                    
+
+
+                    
+
+                    
+
+                    
+
+                    
+                    
+
+                    
+                    
+
+                    
+                    
+
+                    
+
+                </div>
+            </div>
+
+            
+
+            <section class="body">
+                <h2 id="the-ray-sphere-intersection-problem"><a class="zola-anchor" href="#the-ray-sphere-intersection-problem" aria-label="Anchor link for: the-ray-sphere-intersection-problem">The Ray-Sphere Intersection Problem</a></h2>
+<p>When implementing ray tracing, one of the fundamental operations is determining whether a ray intersects with a sphere. This involves solving a quadratic equation derived from the sphere's mathematical definition.</p>
+<h3 id="the-mathematical-foundation"><a class="zola-anchor" href="#the-mathematical-foundation" aria-label="Anchor link for: the-mathematical-foundation">The Mathematical Foundation</a></h3>
+<p>A sphere with radius $r$ centered at point $\mathbf{C}$ is defined by the equation:</p>
+<p>$$(\mathbf{C} - \mathbf{P}) \cdot (\mathbf{C} - \mathbf{P}) = r^2$$</p>
+<p>Where $\mathbf{P}$ is any point on the sphere's surface. For a ray defined as $\mathbf{P}(t) = \mathbf{Q} + t\mathbf{d}$, we substitute to find intersection points:</p>
+<p>$$(\mathbf{C} - (\mathbf{Q} + t\mathbf{d})) \cdot (\mathbf{C} - (\mathbf{Q} + t\mathbf{d})) = r^2$$</p>
+<p>Expanding this using vector algebra:</p>
+<p>$$t^2\mathbf{d} \cdot \mathbf{d} - 2t\mathbf{d} \cdot (\mathbf{C} - \mathbf{Q}) + (\mathbf{C} - \mathbf{Q}) \cdot (\mathbf{C} - \mathbf{Q}) - r^2 = 0$$</p>
+<h2 id="the-subtle-bug"><a class="zola-anchor" href="#the-subtle-bug" aria-label="Anchor link for: the-subtle-bug">The Subtle Bug</a></h2>
+<p>The tricky part isn't just knowing that dot products and multiplications are different - it's knowing <strong>when to use which one</strong> when translating mathematical formulas to code.</p>
+<p>Let's look at the discriminant formula:</p>
+<p>$$\Delta = b^2 - 4ac$$</p>
+<p>Where:</p>
+<ul>
+<li>$a = \mathbf{d} \cdot \mathbf{d}$ (scalar)</li>
+<li>$b = -2\mathbf{d} \cdot \mathbf{oc}$ (scalar)</li>
+<li>$c = \mathbf{oc} \cdot \mathbf{oc} - r^2$ (scalar)</li>
+</ul>
+<p><strong>The key insight</strong>: Once you've computed the dot products, you're working with <strong>scalars</strong>, so you use regular multiplication.</p>
+<p>Here's the incorrect implementation that confuses this:</p>
+<pre data-lang="cpp" style="background-color:#2b303b;color:#c0c5ce;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#65737e;">// INCORRECT - mixing up when to use * vs dot()
+</span><span>vec3 oc = center - r.</span><span style="color:#bf616a;">origin</span><span>();
+</span><span style="color:#b48ead;">auto</span><span> direction_square = </span><span style="color:#bf616a;">dot</span><span>(r.</span><span style="color:#bf616a;">direction</span><span>(), r.</span><span style="color:#bf616a;">direction</span><span>());  </span><span style="color:#65737e;">// scalar
+</span><span style="color:#b48ead;">double</span><span> oc_oc = </span><span style="color:#bf616a;">dot</span><span>(oc, oc);  </span><span style="color:#65737e;">// scalar
+</span><span>
+</span><span style="color:#b48ead;">auto</span><span> d = oc_oc * direction_square - direction_square * (oc_oc - radius * radius);
+</span><span style="color:#b48ead;">return</span><span> d &gt; </span><span style="color:#d08770;">0</span><span>;
+</span></code></pre>
+<p><strong>What went wrong?</strong> The code correctly computed the dot products to get scalars, but then tried to "reconstruct" the discriminant formula incorrectly. It should have used the standard quadratic formula: $b^2 - 4ac$.</p>
+<h2 id="the-correct-implementation"><a class="zola-anchor" href="#the-correct-implementation" aria-label="Anchor link for: the-correct-implementation">The Correct Implementation</a></h2>
+<pre data-lang="cpp" style="background-color:#2b303b;color:#c0c5ce;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span>vec3 oc = center - r.</span><span style="color:#bf616a;">origin</span><span>();
+</span><span style="color:#b48ead;">auto</span><span> a = </span><span style="color:#bf616a;">dot</span><span>(r.</span><span style="color:#bf616a;">direction</span><span>(), r.</span><span style="color:#bf616a;">direction</span><span>());
+</span><span style="color:#b48ead;">auto</span><span> b = -</span><span style="color:#d08770;">2.0 </span><span>* </span><span style="color:#bf616a;">dot</span><span>(r.</span><span style="color:#bf616a;">direction</span><span>(), oc);  </span><span style="color:#65737e;">// Note the -2.0 factor
+</span><span style="color:#b48ead;">auto</span><span> c = </span><span style="color:#bf616a;">dot</span><span>(oc, oc) - radius * radius;
+</span><span style="color:#b48ead;">auto</span><span> discriminant = b * b - </span><span style="color:#d08770;">4.0 </span><span>* a * c;  </span><span style="color:#65737e;">// Standard quadratic formula
+</span><span style="color:#b48ead;">return </span><span>(discriminant &gt;= </span><span style="color:#d08770;">0</span><span>);
+</span></code></pre>
+<h2 id="the-rule-follow-the-mathematical-formula-exactly"><a class="zola-anchor" href="#the-rule-follow-the-mathematical-formula-exactly" aria-label="Anchor link for: the-rule-follow-the-mathematical-formula-exactly">The Rule: Follow the Mathematical Formula Exactly</a></h2>
+<p>The golden rule: <strong>Once you've computed all dot products, you're working with scalars and should follow the mathematical formula exactly.</strong></p>
+<p>Here's the step-by-step process:</p>
+<ol>
+<li><strong>Identify dot products in the formula</strong>: Look for $\mathbf{a} \cdot \mathbf{b}$ patterns</li>
+<li><strong>Compute them first</strong>: <code>auto a = dot(d, d); auto b = dot(d, oc);</code></li>
+<li><strong>Apply the mathematical formula</strong>: Use regular multiplication for the final calculation</li>
+</ol>
+<pre data-lang="cpp" style="background-color:#2b303b;color:#c0c5ce;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#65737e;">// Step 1: Compute dot products to get scalars
+</span><span style="color:#b48ead;">auto</span><span> a = </span><span style="color:#bf616a;">dot</span><span>(r.</span><span style="color:#bf616a;">direction</span><span>(), r.</span><span style="color:#bf616a;">direction</span><span>());  </span><span style="color:#65737e;">// scalar
+</span><span style="color:#b48ead;">auto</span><span> b = -</span><span style="color:#d08770;">2.0 </span><span>* </span><span style="color:#bf616a;">dot</span><span>(r.</span><span style="color:#bf616a;">direction</span><span>(), oc);      </span><span style="color:#65737e;">// scalar  
+</span><span style="color:#b48ead;">auto</span><span> c = </span><span style="color:#bf616a;">dot</span><span>(oc, oc) - radius * radius;      </span><span style="color:#65737e;">// scalar
+</span><span>
+</span><span style="color:#65737e;">// Step 2: Apply the quadratic formula exactly
+</span><span style="color:#b48ead;">auto</span><span> discriminant = b * b - </span><span style="color:#d08770;">4.0 </span><span>* a * c;     </span><span style="color:#65737e;">// all scalars, use *
+</span></code></pre>
+<h2 id="key-takeaways"><a class="zola-anchor" href="#key-takeaways" aria-label="Anchor link for: key-takeaways">Key Takeaways</a></h2>
+<ol>
+<li><strong>Dot products → scalars</strong>: <code>dot(vec3, vec3)</code> always returns a scalar</li>
+<li><strong>Scalars → multiplication</strong>: Once you have scalars, use <code>*</code> not <code>dot()</code></li>
+<li><strong>Follow the formula</strong>: Don't try to "reconstruct" the math - use the standard quadratic formula</li>
+<li><strong>Check your types</strong>: If you're multiplying two <code>double</code> values, you want <code>*</code>, not <code>dot()</code></li>
+</ol>
+<p>The bug happens when you forget that dot products reduce vectors to scalars, and then try to "reconstruct" the original vector math instead of following the simplified scalar formula.</p>
+<h1 id="reference"><a class="zola-anchor" href="#reference" aria-label="Anchor link for: reference">Reference</a></h1>
+<p>Reference: <a href="https://raytracing.github.io/books/RayTracingInOneWeekend.html#addingasphere">Ray Tracing in One Weekend - Adding a Sphere</a></p>
+
+            </section>
+        </article>
+    </main>
+</div>
+
+
+
+            
+                
+            
+
+            
+        </div>
+
+        <div class="right-content">
+            
+    
+    
+
+        </div>
+    </body>
+
+</html>

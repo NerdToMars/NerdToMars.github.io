@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://nerdtomars.github.io/</loc>
+    </url>
+    <url>
+        <loc>https://nerdtomars.github.io/about/</loc>
+    </url>
+    <url>
+        <loc>https://nerdtomars.github.io/posts/</loc>
+    </url>
+    <url>
+        <loc>https://nerdtomars.github.io/posts/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://nerdtomars.github.io/posts/raytracing-basic-sphere/</loc>
+        <lastmod>2025-07-14</lastmod>
+    </url>
+    <url>
+        <loc>https://nerdtomars.github.io/posts/raytracing-range/</loc>
+        <lastmod>2025-07-14</lastmod>
+    </url>
+    <url>
+        <loc>https://nerdtomars.github.io/projects/</loc>
+    </url>
+    <url>
+        <loc>https://nerdtomars.github.io/projects/structure-light/</loc>
+    </url>
+    <url>
+        <loc>https://nerdtomars.github.io/projects/synthetic-image-for-ai/</loc>
+    </url>
+    <url>
+        <loc>https://nerdtomars.github.io/tags/</loc>
+    </url>
+</urlset>
