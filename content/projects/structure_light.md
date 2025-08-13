@@ -4,7 +4,7 @@ description = "A high-accuracy structure light scanner based on a custom-built p
 weight = 1
 
 [extra]
-# local_image = "project-1.jpg"
+local_image = "assets/structure_light/screenshot.png"
 # link_to = "https://github.com/NerdToMars/nerf-rust/tree/main/src"
 +++
 

@@ -4,7 +4,7 @@ description = "A simple image synthesis pipeline based on mitsuba3 and visualiza
 weight = 1
 
 [extra]
-# local_image = "project-1.jpg"
+local_image = "assets/synthetic_image_for_ai/screenshot.png"
 # link_to = "https://github.com/NerdToMars/nerf-rust/tree/main/src"
 +++
 
