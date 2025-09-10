@@ -101,7 +101,7 @@ Hence, the proposition is true for $n = k+1$.
 
 By induction, the proposition is true for any $n$.
 
-Indeed, there is a convex set $T$, that $T \supe S $,
+Indeed, there is a convex set $T$, that $T \supseteq S$,
 
 given points $x_1, x2, .. x_n$ in $S$, i.e. also in $T$, their convex combination is also in $T$ based on the proposition. Hence every point in $Cov S$ also in $T$. Hence $Cov S$ is the smallest convex set that contains $S$.
 
