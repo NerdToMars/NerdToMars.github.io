@@ -23,14 +23,14 @@ To prove the statement, we need to prove the following two statements:
 Represent all the possible convex combination of the points in $S$:
 
 $$
-CV(S) = \{ \sum_{i=1}^n \theta_i v_i | \theta_i \ge 0, \sum_{i=1}^{n} \theta_i = 1 \}
+Cov(S) = \{ \sum_{i=1}^n \theta_i v_i | \theta_i \ge 0, \sum_{i=1}^{n} \theta_i = 1 \}
 $$
 
-CV(S) is a union of all the convex combination of the points in $S$. For any single point $a$ in $S$, we also have $a \in CV(S)$.
+$Cov(S)$ is a union of all the convex combination of the points in $S$. For any single point $v_i$ in $S$, we also have $v_i \in Cov(S)$.
 
-To prove $CV(S)$ is a convex set, we need to prove given any 2 points $a, b$ in CV(S), the line segment between $a$ and $b$ is also in CV(S).
+To prove $Cov(S)$ is a convex set, we need to prove given any 2 points $a, b$ in $Cov(S)$, the line segment between $a$ and $b$ is also in $Cov(S)$.
 
-Given any two points $a, b$ in $CV(S)$, point $a, b$ can be written as:
+Given any two points $a, b$ in $Cov(S)$, point $a, b$ can be written as:
 
 $$
 a = \sum_{i=1}^n \theta_i v_i
@@ -53,9 +53,9 @@ $$
 p = \lambda \sum_{i=1}^n \theta_i v_i + (1-\lambda) \sum_{i=1}^m \phi_i v_i
 $$
 
-we can easily find that $\sum_{i=1}^{n} \lambda \theta_i + \sum_{i=1}^{m} (1-\lambda) \phi_i = 1$ and $\lambda \theta_i, (1-\lambda) \phi_i \ge 0$. $\implies p \in CV(S)$.
+we can easily find that $\sum_{i=1}^{n} \lambda \theta_i + \sum_{i=1}^{m} (1-\lambda) \phi_i = 1$ and $\lambda \theta_i, (1-\lambda) \phi_i \ge 0$. Based on the definition of convex hull, $\implies p \in Cov(S)$.
 
-Hence, based on the definition of convex set, $CV(S)$ is a convex set.
+Hence, based on the definition of convex set, $Cov(S)$ is a convex set.
 
 
 
