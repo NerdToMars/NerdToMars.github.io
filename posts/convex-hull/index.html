@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en" class="dark light">
+
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https:&#x2F;&#x2F;nerdtomars.github.io">
+
+    
+
+    
+    
+    
+        <title>
+            
+                Convex Hull
+            
+        </title>
+
+        
+            <meta property="og:title"
+                  content="Convex Hull" />
+        
+    
+
+    
+        
+            <meta property="og:description" content="Exploring computer vision, software engineering, and computer graphics through code, research, and random discoveries" />
+        
+    
+
+    
+        
+            <meta name="description" content="Exploring computer vision, software engineering, and computer graphics through code, research, and random discoveries" />
+        
+    
+
+    
+    
+
+    
+    
+        <link href=https://nerdtomars.github.io/fonts.css rel="stylesheet" />
+    
+
+    
+    
+
+    
+    
+        
+
+        
+            
+            
+
+            <script data-goatcounter="https://chongtia002.goatcounter.com/count"
+                    async
+                    src="https://nerdtomars.github.io/js/count.js"></script>
+            <noscript>
+                
+                <img src="https://chongtia002.goatcounter.com//count?p=&#x2F;posts&#x2F;convex-hull&#x2F;&t=Convex Hull">
+            </noscript>
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+        
+            <script>
+            MathJax = {
+              tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+              }
+            };
+            </script>
+        
+        <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+        </script>
+    
+
+    
+    
+
+
+    
+    
+        <link rel="stylesheet"
+              type="text/css"
+              href="https://nerdtomars.github.io/theme/light.css" />
+        <link id="darkModeStyle"
+              rel="stylesheet"
+              type="text/css"
+              href="https://nerdtomars.github.io/theme/dark.css" />
+    
+
+    <!-- Set the correct theme in the script -->
+
+    
+        <script src=https://nerdtomars.github.io/js/themetoggle.js></script>
+
+        
+            <script>setTheme(getSavedTheme());</script>
+        
+    
+
+
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="https://nerdtomars.github.io/main.css" />
+
+    
+
+    <script defer
+                    src="https://nerdtomars.github.io/search_index.en.js?h=9ec5854ef9bc45a4067b"></script>
+        <script defer
+                src="https://nerdtomars.github.io/js/searchElasticlunr.min.js?h=3626c0ef99daa745b31e"></script></head>
+
+
+    <body>
+        <div class="left-content">
+            
+            
+        </div>
+
+        <div class="content">
+            <nav>
+    <div class="left-nav">
+        
+            <a href=https:&#x2F;&#x2F;nerdtomars.github.io>Bits and Pixels</a>
+        
+
+
+        <div class="socials">
+            
+                <a rel="me" href="https:&#x2F;&#x2F;github.com&#x2F;nerdtomars" class="social">
+                    <img alt="github" src="https://nerdtomars.github.io/icons/social/github.svg">
+                </a>
+            
+        </div>
+    </div>
+
+    <div class="right-nav">
+        
+            <a href=https://nerdtomars.github.io/posts style="margin-right: 0.5em">&#x2F;posts</a>
+        
+            <a href=https://nerdtomars.github.io/projects style="margin-right: 0.5em">&#x2F;projects</a>
+        
+            <a href=https://nerdtomars.github.io/tags style="margin-right: 0.5em">&#x2F;tags</a>
+        
+
+        
+            <button id="search-button"
+                    class="search-button"
+                    title="$SHORTCUT to open search">
+                <img src="https://nerdtomars.github.io/icons/search.svg"
+                    alt="Search"
+                    class="search-icon">
+            </button>
+
+            <div id="searchModal"
+                class="search-modal js"
+                role="dialog"
+                aria-labelledby="modalTitle">
+                <div id="modal-content">
+                    <h1 id="modalTitle" class="page-header">Search</h1>
+                    <div id="searchBar">
+                        <input id="searchInput"
+                            role="combobox"
+                            autocomplete="off"
+                            spellcheck="false"
+                            aria-expanded="false"
+                            aria-controls="results-container"
+                            placeholder="Search..." />
+                        <button id="clear-search" class="clear-button" title="Clear search">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="results-container">
+                        <div id="results-info">
+                            <span id="zero_results" style="display: none;">No results</span>
+                            <span id="one_result" style="display: none;">1 result</span>
+                            <span id="many_results" style="display: none;">$NUMBER results</span>
+                        </div>
+                        <div id="results" role="listbox"></div>
+                    </div>
+                </div>
+            </div>
+        
+
+        
+            <a id="dark-mode-toggle"
+            onclick="toggleTheme(); event.preventDefault();"
+            href="#">
+                <img src="https://nerdtomars.github.io/icons/sun.svg"
+                    id="sun-icon"
+                    style="filter: invert(1)"
+                    alt="Light" />
+                <img src=https://nerdtomars.github.io/icons/moon.svg id="moon-icon" alt="Dark" />
+            </a>
+
+            <!-- Initialize the theme toggle icons -->
+            <script>updateItemToggleTheme()</script>
+        
+    </div>
+</nav>
+
+
+            
+            
+    
+<div class="visible-element-observer-root" data-selector="main article p">
+    <main>
+        <article>
+            <div class="title">
+                
+                
+    
+    <div class="page-header">
+        Convex Hull
+    </div>
+    
+
+
+                <div class="meta">
+                    
+                        Posted on <time>2025-08-18</time>
+                    
+
+
+                    
+
+                    
+
+                    
+
+                    
+                    
+
+                    
+                    
+
+                    
+                    
+
+                    
+
+                </div>
+            </div>
+
+            
+
+            <section class="body">
+                <h2 id="convex-hull"><a class="zola-anchor" href="#convex-hull" aria-label="Anchor link for: convex-hull">Convex Hull</a></h2>
+<p>Statement:</p>
+<p>Given a set of points $S = {v_1, v_2, \ldots, v_n}$, the convex hull of $S$ is all the possible convex combination of the points in $S$, and is the smallest convex set that contains $S$.</p>
+<h2 id="proves"><a class="zola-anchor" href="#proves" aria-label="Anchor link for: proves">Proves</a></h2>
+<p>To prove the statement, we need to prove the following two statements:</p>
+<ol>
+<li>The convex hull of $S$ is a convex set.</li>
+<li>The convex hull of $S$ is the smallest convex set that contains $S$.</li>
+</ol>
+<h3 id="proof-of-first-statement"><a class="zola-anchor" href="#proof-of-first-statement" aria-label="Anchor link for: proof-of-first-statement">Proof of first statement</a></h3>
+<p>Represent all the possible convex combination of the points in $S$:</p>
+<p>$$
+Cov(S) = { \sum_{i=1}^n \theta_i v_i | \theta_i \ge 0, \sum_{i=1}^{n} \theta_i = 1 }
+$$</p>
+<p>$Cov(S)$ is a union of all the convex combination of the points in $S$. For any single point $v_i$ in $S$, we also have $v_i \in Cov(S)$.</p>
+<p>To prove $Cov(S)$ is a convex set, we need to prove given any 2 points $a, b$ in $Cov(S)$, the line segment between $a$ and $b$ is also in $Cov(S)$.</p>
+<p>Given any two points $a, b$ in $Cov(S)$, point $a, b$ can be written as:</p>
+<p>$$
+a = \sum_{i=1}^n \theta_i v_i
+$$</p>
+<p>$$
+b = \sum_{i=1}^m \phi_i v_i
+$$</p>
+<p>we can apply a convex combination to get a new point $p$ (where $\sum_{i=1}^{n} \theta_i = 1$ and $\theta_i \ge 0$):</p>
+<p>$$
+p = \lambda a + (1-\lambda) b
+$$</p>
+<p>$\implies p$ can be written as:</p>
+<p>$$
+p = \lambda \sum_{i=1}^n \theta_i v_i + (1-\lambda) \sum_{i=1}^m \phi_i v_i
+$$</p>
+<p>we can easily find that $\sum_{i=1}^{n} \lambda \theta_i + \sum_{i=1}^{m} (1-\lambda) \phi_i = 1$ and $\lambda \theta_i, (1-\lambda) \phi_i \ge 0$. Based on the definition of convex hull, $\implies p \in Cov(S)$.</p>
+<p>Hence, based on the definition of convex set, $Cov(S)$ is a convex set.</p>
+<h2 id="proof-of-second-statement"><a class="zola-anchor" href="#proof-of-second-statement" aria-label="Anchor link for: proof-of-second-statement">Proof of second statement</a></h2>
+<p>Given following proposition:</p>
+<p>Proposition:</p>
+<p>If A set $T$ is a convex set for points $x_1, x_2 .. x_n$ in $T$, the convex combination of these points is also in $T$.</p>
+<p>Proof:</p>
+<p>if $n = 0, 1, 2$, given any convex set $T$, the convex combination of any two points in $T$ is also in $T$.</p>
+<p>if $n &gt; 2$, we can prove by induction.</p>
+<p>Assume the proposition is true for $n = k$, we need to prove the proposition is true for $n = k+1$.</p>
+<p>For a convex combination of $k$ points in $T$, we can write it as:</p>
+<p>$$
+p = \sum_{i=1}^k \theta_i x_i
+$$</p>
+<p>where $\sum_{i=1}^{k} \theta_i = 1$ and $\theta_i \ge 0$, $p \in T$.</p>
+<p>For any point $v_{k+1} \in S$, we can write $k$ points convex combination as:</p>
+<p>$$
+p_{k+1} = \lambda p_{k} + (1-\lambda) x_{k+1}
+$$</p>
+<p>which can be written as the result we want to prove:</p>
+<p>$$
+p_{k+1} = \sum_{i=1}^{k+1} \alpha_i x_i
+$$</p>
+<p>where $\sum_{i=1}^{k+1} \alpha_i = 1$ and $\alpha_i \ge 0$.</p>
+<p>Hence, the proposition is true for $n = k+1$.</p>
+<p>By induction, the proposition is true for any $n$.</p>
+<p>Indeed, there is a convex set $T$, that $T \supe S $,</p>
+<p>given points $x_1, x2, .. x_n$ in $S$, i.e. also in $T$, their convex combination is also in $T$ based on the proposition. Hence every point in $Cov S$ also in $T$. Hence $Cov S$ is the smallest convex set that contains $S$.</p>
+<p>Ref:</p>
+<ul>
+<li>https://math.stackexchange.com/questions/2240533/prove-convex-hull-is-convex</li>
+<li>https://www.math.drexel.edu/~tyu/Math690Optimization/lec6.pdf</li>
+<li>https://ti.inf.ethz.ch/ew/courses/CG13/lecture/Chapter%203.pdf</li>
+</ul>
+
+            </section>
+        </article>
+    </main>
+</div>
+
+
+
+            
+                
+            
+
+            
+        </div>
+
+        <div class="right-content">
+            
+    
+    
+
+        </div>
+    </body>
+
+</html>
